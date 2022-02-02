@@ -1,0 +1,11 @@
+C:\Users\alexe\source\repos\MiniPrograms\MiniPrograms\bin\Debug\MiniPrograms.exe.config
+C:\Users\alexe\source\repos\MiniPrograms\MiniPrograms\bin\Debug\MiniPrograms.exe
+C:\Users\alexe\source\repos\MiniPrograms\MiniPrograms\bin\Debug\MiniPrograms.pdb
+C:\Users\alexe\source\repos\MiniPrograms\MiniPrograms\obj\Debug\MiniPrograms.csproj.AssemblyReference.cache
+C:\Users\alexe\source\repos\MiniPrograms\MiniPrograms\obj\Debug\MiniPrograms.csproj.SuggestedBindingRedirects.cache
+C:\Users\alexe\source\repos\MiniPrograms\MiniPrograms\obj\Debug\MiniPrograms.Properties.Resources.resources
+C:\Users\alexe\source\repos\MiniPrograms\MiniPrograms\obj\Debug\MiniPrograms.csproj.GenerateResource.cache
+C:\Users\alexe\source\repos\MiniPrograms\MiniPrograms\obj\Debug\MiniPrograms.csproj.CoreCompileInputs.cache
+C:\Users\alexe\source\repos\MiniPrograms\MiniPrograms\obj\Debug\MiniPrograms.exe
+C:\Users\alexe\source\repos\MiniPrograms\MiniPrograms\obj\Debug\MiniPrograms.pdb
+C:\Users\alexe\source\repos\MiniPrograms\MiniPrograms\obj\Debug\MiniPrograms.fMainForm.resources

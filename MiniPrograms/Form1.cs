@@ -10,11 +10,50 @@ using System.Windows.Forms;
 
 namespace MiniPrograms
 {
-    public partial class Form1 : Form
+    public partial class fMainForm : Form
     {
-        public Form1()
+        public int count = 0;
+        Random rnd = new Random();
+        
+        public fMainForm()
         {
             InitializeComponent();
+        }
+
+        private void tsmExit_Click(object sender, EventArgs e) //кнопка выход
+        {
+            this.Close();
+        }
+
+        private void tsmAbout_Click(object sender, EventArgs e) //кнопка о программе
+        {
+            MessageBox.Show("Программа 'Universe utilites' служит для практики с языком С#, чтобы показать " +
+                "как работают основы языка и FindowsForm. \nАвторство Мацков А.Е.");
+        }
+
+        private void btnPlus_Click(object sender, EventArgs e) //кнопка плюс
+        {
+            count++;
+            lblCount.Text = count.ToString();
+        }
+
+        private void btnMinus_Click(object sender, EventArgs e) //кнопка минус
+        {
+            count--;
+            lblCount.Text = count.ToString();
+        }
+
+        private void btnReset_Click(object sender, EventArgs e) //сборс
+        {
+            count = 0;
+            lblCount.Text =Convert.ToString(count); //ещё способ конвертирования инт в стр
+        }
+
+        private void btnGeneric_Click(object sender, EventArgs e) //сгенерироть рандом
+        {
+            int n;
+            n = rnd.Next(Convert.ToInt32(numericUpDown1.Value), Convert.ToInt32(numericUpDown2.Value));
+            lblRandom.Text = n.ToString();
         }
     }
 }
