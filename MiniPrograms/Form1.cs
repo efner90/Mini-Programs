@@ -54,6 +54,32 @@ namespace MiniPrograms
             int n;
             n = rnd.Next(Convert.ToInt32(numericUpDown1.Value), Convert.ToInt32(numericUpDown2.Value));
             lblRandom.Text = n.ToString();
+            if (chbRepeat.Checked)
+            {
+                int count = 0;
+                while (tbRandom.Text.IndexOf(n.ToString()) != -1)//исключаем повторения
+                {
+                    n = rnd.Next(Convert.ToInt32(numericUpDown1.Value), Convert.ToInt32(numericUpDown2.Value));
+                    count++;
+                    lblRandom.Text = n.ToString();
+                    if (count > 1000) break;
+                }
+                    if (count <=1000)
+                    tbRandom.AppendText(n + "\r\n");
+                
+            }
+            else tbRandom.AppendText(n + "\r\n");
+
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            tbRandom.Clear();
+        }
+
+        private void btnRandomCopy_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(tbRandom.Text); //сохраняем в буфер обмена
         }
     }
 }
