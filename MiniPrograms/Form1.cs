@@ -14,6 +14,8 @@ namespace MiniPrograms
     {
         public int count = 0;
         Random rnd = new Random();
+        char[] spec_chars = new char[] { '!', '@', '#', '$', '%', '^', '&', '*','~','?','*' };
+
         
         public fMainForm()
         {
@@ -80,6 +82,82 @@ namespace MiniPrograms
         private void btnRandomCopy_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(tbRandom.Text); //сохраняем в буфер обмена
+        }
+
+        private void tsmInsertDate_Click(object sender, EventArgs e) //добавляем текущую дату
+        {
+            rtbBloknot.AppendText(DateTime.Now.ToShortDateString() + "\n");
+            
+        }
+
+        private void tsmInsertTime_Click(object sender, EventArgs e)//текущее время
+        {
+            rtbBloknot.AppendText(DateTime.Now.ToShortTimeString() + "\n");
+        }
+        /// <summary>
+        ///Загрузка файла Ноутпад
+        /// </summary>
+        void LoadNotepad()
+        {
+            try
+            {
+                rtbBloknot.LoadFile("notepad.rtf");
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка при загрузке");
+            }
+        }
+        private void tsmSave_Click(object sender, EventArgs e) //сохраняем файл
+        {
+            try
+            {
+                rtbBloknot.SaveFile("notepad.rtf");
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка при сохранении");
+            }
+        }
+
+        private void tsmLoad_Click(object sender, EventArgs e) //загружаем файл
+        {                   //важно отметить, что сохранение и загрузка
+                            //осуществляется в одном конкретном файле                      
+            LoadNotepad();
+        }
+
+        private void fMainForm_Load(object sender, EventArgs e) //загружается при открытии фолрмы
+        {
+            LoadNotepad();
+            clbPassword.SetItemChecked(0, true); //выбираем сразу пару чекбоксов при загрузен формы
+            clbPassword.SetItemChecked(1, true);
+
+        }
+
+        private void btnCreatePassword_Click(object sender, EventArgs e) //создаём пасс
+        {
+            if (clbPassword.CheckedItems.Count == 0) return; //ничего не выбрано - ничего не делаем, возвращаем
+            string password = ""; //создаём пустое
+            for (int i = 0; i<nudPassLength.Value; i++) //проходим по длине включенных чекбоксов
+            {
+                int n=rnd.Next(0, clbPassword.CheckedItems.Count); //рандом от нуля до вклю боксов
+                string s= clbPassword.CheckedItems[n].ToString(); //сохраняем сгенерированный выше
+                switch (s)
+                {
+                    case "Цифры": password +=rnd.Next(10).ToString(); 
+                        break; //0-9
+                    case "Прописные буквы": password += Convert.ToChar(rnd.Next(65, 88)); 
+                        break;
+                    //делаем рандом символов по таблице
+                    case "Строчные буквы": password += Convert.ToChar(rnd.Next(97, 122)); 
+                        break;
+                    default:
+                        password += spec_chars[rnd.Next(spec_chars.Length)];
+                        break;
+                }
+                tbPasswordField.Text = password;
+                //Clipboard.SetText(password); сразу в буфер пихает
+            }
         }
     }
 }
