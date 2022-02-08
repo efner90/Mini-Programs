@@ -15,11 +15,29 @@ namespace MiniPrograms
         public int count = 0;
         Random rnd = new Random();
         char[] spec_chars = new char[] { '!', '@', '#', '$', '%', '^', '&', '*','~','?','*' };
+        Dictionary<string, double> metrica; //создаём словарь
 
-        
+        string[] lengthName = new string[] { "mm", "cm", "dm", "m", "km", "mile" }; //длина
+        double[] lengthValue = new double[] { 1, 10, 100, 1000, 1000000, 1609344 };
+
+        string[] weightName = new string[] { "g", "kg", "t", "lb/'funt'", "oz/'uncia'" };
+        double[] weightValue = new double[] { 1, 1000, 1000000, 453.6, 28.3 };
+
+
         public fMainForm()
         {
             InitializeComponent();
+            metrica = new Dictionary<string, double>();
+            for (int i = 0; i < lengthName.Length; i++) //заполняем словарик длины
+            {
+                metrica.Add(lengthName[i], lengthValue[i]);
+            }
+
+            //for (int i = 0; i < weightName.Length; i++) //заполняем словарик веса
+            //{
+            //    metrica.Add(weightName[i], weightValue[i]);
+            //}
+
         }
 
         private void tsmExit_Click(object sender, EventArgs e) //кнопка выход
@@ -157,6 +175,60 @@ namespace MiniPrograms
                 }
                 tbPasswordField.Text = password;
                 //Clipboard.SetText(password); сразу в буфер пихает
+            }
+        }
+
+        private void btnConvert_Click(object sender, EventArgs e)
+        {
+            double m1 = metrica[cbFrom.Text]; //берём Из
+            double m2 = metrica[cbTo.Text]; //берём В
+            double conv = Convert.ToDouble(tbFrom.Text); //берём нужную сумму
+            tbTo.Text = (conv*m1/m2).ToString(); //конвертируем
+        }
+
+        private void btnSwap_Click(object sender, EventArgs e) //меняем величины местами
+        {
+            string t = cbFrom.Text; 
+            cbFrom.Text = cbTo.Text;
+            cbTo.Text = t;
+        }
+
+        private void cbMetric_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            metrica.Clear();
+            //cbFrom.Items.Clear();
+            //cbTo.Items.Clear();            
+            switch (cbMetric.Text)
+            {
+                case "Длина":
+                    metrica.Clear();
+                    cbFrom.Items.Clear();
+                    cbTo.Items.Clear();
+                    for (int i = 0;i< lengthName.Length;i++)
+                    {
+                        metrica.Add(lengthName[i], lengthValue[i]);
+                        cbFrom.Items.Add(lengthName[i]);
+                        cbTo.Items.Add(lengthName[i]);
+                    }
+                    cbFrom.Text = lengthName[0];
+                    cbTo.Text = lengthName[0];
+                    break;
+
+                case "Вес":
+                    //metrica.Clear();
+                    cbFrom.Items.Clear();
+                    cbTo.Items.Clear();
+                    for (int i = 0;i<weightName.Length;i++)
+                    {
+                        metrica.Add(weightName[i], weightValue[i]);
+                        cbFrom.Items.Add(weightName [i]);
+                        cbTo.Items.Add(weightName[i]);
+                    }
+                    cbFrom.Text = weightName[0];
+                    cbTo.Text = weightName[0];
+                    break;
+                default:
+                    break;
             }
         }
     }
